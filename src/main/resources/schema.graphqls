@@ -1,17 +1,16 @@
 type Query {
-    adoById(id: ID): Ado
-    adoByCcy1(ccy1: String): [Ado!]
+    fxRatesByBaseCurrency(baseCurrency: String): [Ado!]
 }
 
 type Ado {
     id: ID
     name: String
-    ccy1: String
-    ccy2: String
+    baseCurrency: String
+    quoteCurrency: String
     timeseries: [TimeseriesRow!]
 }
 
 type TimeseriesRow {
     date: Int
-    value: Float
+    rate: Float
 }

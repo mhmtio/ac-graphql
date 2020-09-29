@@ -17,10 +17,10 @@ public class GraphQLDataFetchers {
     @Autowired
     private AcAccess ac;
 
-    public DataFetcher<Map<String, String>> getAdoByIdDataFetcher() {
+    public DataFetcher<List<Map<String, String>>> getFxRatesByBaseCurrency() {
         return dataFetchingEnvironment -> {
-            String adoId = dataFetchingEnvironment.getArgument("id");
-            return ac.findAdoById(adoId).map(ado -> getAdoData(ado)).orElse(null);
+            String ccy = dataFetchingEnvironment.getArgument("baseCurrency");
+            return ac.findAdosByBaseCurrency(ccy).stream().map(ado -> getAdoData(ado)).collect(Collectors.toList());
         };
     }
 
@@ -28,8 +28,8 @@ public class GraphQLDataFetchers {
         return ImmutableMap.of(
                 "id", ado.getId(),
                 "name", ado.getLongname(),
-                "ccy1", getAsString(ado, "C0#SA010"),
-                "ccy2", getAsString(ado, "C0#SA011")
+                "baseCurrency", getAsString(ado, "C0#SA010"),
+                "quoteCurrency", getAsString(ado, "C0#SA011")
         );
     }
 
@@ -39,13 +39,6 @@ public class GraphQLDataFetchers {
         } catch (AcException e) {
             return "<error>";
         }
-    }
-
-    public DataFetcher<List<Map<String, String>>> getAdoByCCy1DataFetcher() {
-        return dataFetchingEnvironment -> {
-            String ccy1 = dataFetchingEnvironment.getArgument("ccy1");
-            return ac.findAdosByCcy1(ccy1).stream().map(ado -> getAdoData(ado)).collect(Collectors.toList());
-        };
     }
 
     public DataFetcher<List<TimeseriesRow>> getTimeseriesDataFetcher() {

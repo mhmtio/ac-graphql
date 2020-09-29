@@ -11,10 +11,6 @@ import graphql.schema.idl.TypeDefinitionRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -53,9 +49,7 @@ public class GraphQLProvider {
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query")
-                        .dataFetcher("adoById", graphQLDataFetchers.getAdoByIdDataFetcher()))
-                .type(newTypeWiring("Query")
-                        .dataFetcher("adoByCcy1", graphQLDataFetchers.getAdoByCCy1DataFetcher()))
+                        .dataFetcher("fxRatesByBaseCurrency", graphQLDataFetchers.getFxRatesByBaseCurrency()))
                 .type(newTypeWiring("Ado")
                         .dataFetcher("timeseries", graphQLDataFetchers.getTimeseriesDataFetcher()))
                 .build();

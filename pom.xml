@@ -16,7 +16,6 @@
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -27,30 +26,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20</version>
-                    <executions>
-                        <execution>
-                            <id>default-test</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>test</goal>
-                            </goals>
-                            <configuration>
-                                <excludes>
-                                    <exclude>**/*IntegrationTest.java</exclude>
-                                    <exclude>**/*FeatureTest.java</exclude>
-                                </excludes>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
     <dependencies>
@@ -73,11 +48,6 @@
             <groupId>io.terrafino</groupId>
             <artifactId>adetta-api-ac</artifactId>
             <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>asset-control</groupId>
-            <artifactId>ac-server-api</artifactId>
-            <version>4.4.27</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

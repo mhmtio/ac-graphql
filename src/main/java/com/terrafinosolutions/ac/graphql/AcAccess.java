@@ -29,16 +29,7 @@ public class AcAccess {
         }
     }
 
-    public Optional<Ado> findAdoById(String id) throws AcException {
-        List<Ado> ados = acQueryService.adoBrowse(String.format("symbol = '%s'", id));
-        if (ados.size() == 1) {
-            return Optional.of(ados.get(0));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    public List<Ado> findAdosByCcy1(String ccy1) throws AcException {
+    public List<Ado> findAdosByBaseCurrency(String ccy1) throws AcException {
         return acQueryService.adoBrowse(
                 String.format("symbol like 'C0.FXS%%' and attribute('C0#SA010') = '%s' ", ccy1));
     }

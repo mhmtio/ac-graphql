@@ -3,18 +3,18 @@ package com.terrafinosolutions.ac.graphql;
 public class TimeseriesRow {
 
     private Integer date;
-    private Double value;
+    private Double rate;
 
-    public TimeseriesRow(Integer date, Double value) {
+    public TimeseriesRow(Integer date, Double rate) {
         this.date = date;
-        this.value = value;
+        this.rate = rate;
     }
 
     public Integer getDate() {
         return date;
     }
 
-    public Double getValue() {
-        return value;
+    public Double getRate() {
+        return rate;
     }
 }
